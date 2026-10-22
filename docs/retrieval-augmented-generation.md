@@ -61,7 +61,7 @@ Implement one or more of the following:
 
 Use a local LLM (e.g., via DSPy or openai) to generate final answers.
 
-Example setup with DSPy (just using OpenAI may be better):
+Example setup with DSPy ⁄I may be better):
 
 ```
 import os

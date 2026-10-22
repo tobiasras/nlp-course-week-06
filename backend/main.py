@@ -1,5 +1,6 @@
 import uvicorn
 from fastapi import FastAPI
+from course_service import CourseSearchService
 
 app = FastAPI()
 
