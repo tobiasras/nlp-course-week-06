@@ -11,7 +11,6 @@ from course import Course
 from data import Data, passage_texts
 from main import app
 
-
 def test_root(monkeypatch):
     monkeypatch.setattr("main.data_service.load", lambda: None)
     response = TestClient(app).get("/")
