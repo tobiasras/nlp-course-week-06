@@ -99,3 +99,15 @@ def test_search_reports_when_index_is_not_loaded(monkeypatch):
     response = TestClient(app).get("/v1/search", params={"query": "MRI"})
     assert response.status_code == 503
     assert response.json()["detail"] == "course index is not loaded"
+
+
+def test_sparse_mode_is_accepted(monkeypatch):
+    monkeypatch.setattr("main.data_service.load", lambda: None)
+    search_response = TestClient(app).get(
+        "/v1/search", params={"query": "MRI", "mode": "sparse"}
+    )
+    ask_response = TestClient(app).get(
+        "/v1/ask", params={"query": "MRI", "mode": "sparse"}
+    )
+    assert search_response.status_code == 503
+    assert ask_response.status_code == 503

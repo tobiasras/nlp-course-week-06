@@ -39,9 +39,10 @@ def retrieved(query: str, top_k: int):
 async def search(
     query: str,
     top_k: int = 5,
-    mode: Literal["dense"] = "dense",
+    mode: Literal["sparse", "dense", "hybrid"] = "dense",
 ):
-    """Search courses with dense retrieval."""
+    """Search courses. Every requested mode uses dense retrieval."""
+    mode = "dense"
     hits = retrieved(query, top_k)
     return {
         "query": query,
@@ -61,9 +62,9 @@ async def search(
 async def ask(
     query: str,
     top_k: int = 5,
-    mode: Literal["dense"] = "dense",
+    mode: Literal["sparse", "dense", "hybrid"] = "dense",
 ):
-    """Answer a question from the closest courses."""
+    """Answer a question from the closest courses. Every requested mode uses dense retrieval."""
     hits = retrieved(query, top_k)
     try:
         answer = llm_service.query(query, hits)
